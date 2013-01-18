@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".GoList" >
+
+
+    <EditText
+        android:id="@+id/newGoName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/newGoNameHint" >
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/newGoDesc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/newGoName"
+        android:ems="10"
+        android:hint="@string/newGoDescHint" />
+
+    <Button
+        android:id="@+id/newGoCancelButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="27dp"
+        android:layout_marginLeft="74dp"
+        android:text="Cancel" />
+
+    <Button
+        android:id="@+id/newGoOkButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/newGoCancelButton"
+        android:layout_alignBottom="@+id/newGoCancelButton"
+        android:layout_toRightOf="@+id/newGoCancelButton"
+        android:text="OK" />
+
+</RelativeLayout>
