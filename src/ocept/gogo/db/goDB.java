@@ -48,8 +48,19 @@ public class goDB {
 	}
 	public long insertGo(Go go)
 	{
-		
-		return 1;
+		try{
+			ContentValues newTaskValue = new ContentValues();
+			newTaskValue.put(Constants.TITLE_NAME, go.Name);
+			newTaskValue.put(Constants.CONTENT_NAME, go.Desc);
+			newTaskValue.put(Constants.DATE_NAME,
+			java.lang.System.currentTimeMillis());
+			return db.insert(Constants.TABLE_NAME, null, newTaskValue);
+		}
+		catch(SQLiteException ex) {
+		Log.v("Insert into database exception caught",
+				ex.getMessage());
+			return -1;
+		}
 	}
 	public Cursor getdiaries()
 	{
