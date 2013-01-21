@@ -4,5 +4,9 @@ package ocept.gogo;
 public class Go {
 	public String Name;
 	public String Desc;
-
+	public Go(String name, String desc){
+		Name = name;
+		Desc = desc;
+	}
+	public Go(){}
 }
