@@ -11,7 +11,7 @@ public class goDBHelper extends SQLiteOpenHelper{
 		Constants.KEY_ID+" integer primary key autoincrement, "+
 		Constants.TITLE_NAME+" text not null, "+
 		Constants.CONTENT_NAME+" text not null, "+
-		Constants.DATE_NAME+" long);";
+		Constants.LAST_CHECKED_NAME+" long);";
 
 	public goDBHelper(Context context, String name, CursorFactory factory,
 		int version) {

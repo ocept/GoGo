@@ -30,30 +30,13 @@ public class goDB {
 			db = dbhelper.getReadableDatabase();
 		}
 	}
-	public long insertdiary(String title, String content)
-	{
-		try{
-			ContentValues newTaskValue = new ContentValues();
-			newTaskValue.put(Constants.TITLE_NAME, title);
-			newTaskValue.put(Constants.CONTENT_NAME, content);
-			newTaskValue.put(Constants.DATE_NAME,
-			java.lang.System.currentTimeMillis());
-			return db.insert(Constants.TABLE_NAME, null, newTaskValue);
-		}
-		catch(SQLiteException ex) {
-		Log.v("Insert into database exception caught",
-		ex.getMessage());
-		return -1;
-		}
-	}
 	public long insertGo(Go go)
 	{
 		try{
 			ContentValues newTaskValue = new ContentValues();
 			newTaskValue.put(Constants.TITLE_NAME, go.Name);
 			newTaskValue.put(Constants.CONTENT_NAME, go.Desc);
-			newTaskValue.put(Constants.DATE_NAME,
-			java.lang.System.currentTimeMillis());
+			newTaskValue.put(Constants.LAST_CHECKED_NAME,0); //save last checked date as 0
 			return db.insert(Constants.TABLE_NAME, null, newTaskValue);
 		}
 		catch(SQLiteException ex) {
