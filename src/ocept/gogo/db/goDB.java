@@ -36,7 +36,7 @@ public class goDB {
 			ContentValues newTaskValue = new ContentValues();
 			newTaskValue.put(Constants.TITLE_NAME, go.Name);
 			newTaskValue.put(Constants.CONTENT_NAME, go.Desc);
-			newTaskValue.put(Constants.LAST_CHECKED_NAME,0); //save last checked date as 0
+			newTaskValue.put(Constants.LAST_CHECKED_NAME, go.LastChecked); //save last checked date as 0
 			return db.insert(Constants.TABLE_NAME, null, newTaskValue);
 		}
 		catch(SQLiteException ex) {

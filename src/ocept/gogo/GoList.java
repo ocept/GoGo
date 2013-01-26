@@ -79,8 +79,8 @@ public class GoList extends ListActivity {
 		    		try{
 				    	String title = c.getString(c.getColumnIndex(Constants.TITLE_NAME));
 				    	String desc = c.getString(c.getColumnIndex(Constants.CONTENT_NAME));
-				    	Date lastChecked = new Date(c.getLong(c.getColumnIndex(Constants.LAST_CHECKED_NAME)));
-						Go temp = new Go(title,desc);
+				    	Long lastChecked = c.getLong(c.getColumnIndex(Constants.LAST_CHECKED_NAME));
+						Go temp = new Go(title,desc, lastChecked);
 						diaries.add(temp);
 		    		}
 		    		catch(java.lang.RuntimeException ex){
@@ -108,7 +108,14 @@ public class GoList extends ListActivity {
 	    	}
 	    	holder.mdiary = getItem(arg0);
 	    	holder.mTitle.setText(holder.mdiary.Name);
-	    	holder.mDesc.setText(holder.mdiary.Desc); //TODO, replace w/ desc
+	    	holder.mDesc.setText(holder.mdiary.Desc);
+	    	Date Today = new Date();
+	    	if(new Date(holder.mdiary.LastChecked).after(Today)){
+	    		holder.mDone.setChecked(true);
+	    	}
+	    	else{
+	    		holder.mDone.setChecked(false);
+	    	}
 	    	v.setTag(holder);
 	    	
 	    	return v;

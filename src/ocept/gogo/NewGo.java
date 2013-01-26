@@ -1,5 +1,7 @@
 package ocept.gogo;
 
+import java.util.Date;
+
 import ocept.gogo.db.*;
 import android.os.Bundle;
 import android.app.Activity;
@@ -42,11 +44,12 @@ public class NewGo extends Activity {
 		});
 	}
 	private void saveGo(){
-		//get go data
+		//get go data from View
 		Go newGo = new Go();
 		EditText name = (EditText) findViewById(R.id.newGoName);
 		newGo.Name = name.getText().toString();
 		newGo.Desc = ((EditText) findViewById(R.id.newGoDesc)).getText().toString();
+		newGo.LastChecked = (long) 0;
 		
 		//open and enter into db
         dba.open();
