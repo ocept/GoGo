@@ -54,6 +54,8 @@ public class NewGo extends Activity {
 		dba.close();
 		
 		//close activity
+		//GoList.this.myAdapter.notifyDataSetChanged();
+		GoList.myAdapter.notifyDataSetInvalidated();
 		this.finish();
 	}
 	private void closeActivity()

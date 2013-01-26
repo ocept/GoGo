@@ -22,7 +22,7 @@ import android.widget.TextView;
 
 public class GoList extends ListActivity {
 	goDB dba;
-	goAdapter myAdapter;
+	public static goAdapter myAdapter;
 	public String title;
 	public String content;
 	public String recorddate;
@@ -48,6 +48,12 @@ public class GoList extends ListActivity {
 			}
 		});
     }
+    
+    @Override
+    protected void onResume(){
+    	//myAdapter.notifyDataSetChanged();
+    	super.onResume();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -55,7 +61,7 @@ public class GoList extends ListActivity {
         getMenuInflater().inflate(R.menu.activity_go_list, menu);
         return true;
     }
-    private class goAdapter extends BaseAdapter {
+    public class goAdapter extends BaseAdapter {
     	private LayoutInflater mInflater;
     	private ArrayList<Go> diaries;
     	public goAdapter(Context context) {
