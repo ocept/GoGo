@@ -1,7 +1,9 @@
 package ocept.gogo;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import ocept.gogo.db.Constants;
 import ocept.gogo.db.goDB;
@@ -111,8 +113,14 @@ public class GoList extends ListActivity {
 	    	holder.mGo = getItem(position);
 	    	holder.mTitle.setText(holder.mGo.Name);
 	    	holder.mDesc.setText(holder.mGo.Desc);
-	    	Date Today = new Date();
-	    	if(new Date(holder.mGo.LastChecked).after(Today)){
+	    	
+	    	Calendar Today = new GregorianCalendar();
+	    	Today.setTime(new Date());
+	    	Today.add(Calendar.HOUR_OF_DAY, -Calendar.HOUR_OF_DAY);
+	    	//Today.set(Calendar.HOUR_OF_DAY, (getResources().getInteger(R.integer.dayTickOverHour))); //set Today to x hours after midnight today
+	    	Today.set(Calendar.MINUTE, 0);
+	    	Today.set(Calendar.SECOND, 0);
+	    	if(new Date(holder.mGo.LastChecked).after(Today.getTime())){
 	    		holder.mDone.setChecked(true);
 	    	}
 	    	else{
