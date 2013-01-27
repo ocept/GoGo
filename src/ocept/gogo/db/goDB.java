@@ -1,4 +1,6 @@
 package ocept.gogo.db;
+import java.util.Date;
+
 import ocept.gogo.Go;
 import android.content.ContentValues;
 import android.content.Context;
@@ -45,6 +47,23 @@ public class goDB {
 			return -1;
 		}
 	}
+	public long checkGo(int id, boolean isChecked){
+		try{
+		ContentValues newCheckValue = new ContentValues();
+		if(isChecked)
+			newCheckValue.put(Constants.LAST_CHECKED_NAME, new Date().getTime());
+		else
+			newCheckValue.put(Constants.LAST_CHECKED_NAME, 0);
+		String sFilter = Constants.KEY_ID+"= " + id;
+		db.update(Constants.TABLE_NAME, newCheckValue, sFilter, null);
+		return 1;
+		}
+		catch(SQLiteException ex){
+			Log.e("Update db exception", ex.getMessage());
+			return -1;
+		}
+	}
+	
 	public Cursor getGos()
 	{
 		Cursor c = db.query(Constants.TABLE_NAME, null, null,
