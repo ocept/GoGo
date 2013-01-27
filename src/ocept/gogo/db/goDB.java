@@ -47,7 +47,7 @@ public class goDB {
 			return -1;
 		}
 	}
-	public long checkGo(int id, boolean isChecked){
+	public long checkGo(String id, boolean isChecked){
 		try{
 		ContentValues newCheckValue = new ContentValues();
 		if(isChecked)

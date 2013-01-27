@@ -80,7 +80,8 @@ public class GoList extends ListActivity {
 				    	String title = c.getString(c.getColumnIndex(Constants.TITLE_NAME));
 				    	String desc = c.getString(c.getColumnIndex(Constants.CONTENT_NAME));
 				    	Long lastChecked = c.getLong(c.getColumnIndex(Constants.LAST_CHECKED_NAME));
-						Go temp = new Go(title,desc, lastChecked);
+				    	String id = c.getString(c.getColumnIndex(Constants.KEY_ID));
+						Go temp = new Go(title,desc, lastChecked, id);
 						goArray.add(temp);
 		    		}
 		    		catch(java.lang.RuntimeException ex){
@@ -124,6 +125,7 @@ public class GoList extends ListActivity {
 	    		@Override
 	    		public void onCheckedChanged(CompoundButton b, boolean isChecked){
 	    			Toast.makeText(getBaseContext(), "Checked "+pos , Toast.LENGTH_SHORT).show();
+	    			dba.checkGo(holder.mGo.KeyId, isChecked);
 	    		}
 	    		
 	    	});
