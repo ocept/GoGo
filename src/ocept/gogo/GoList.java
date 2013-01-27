@@ -2,7 +2,6 @@ package ocept.gogo;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.text.DateFormat;
 
 import ocept.gogo.db.Constants;
 import ocept.gogo.db.goDB;
@@ -11,7 +10,6 @@ import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-//import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -20,7 +18,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class GoList extends ListActivity {
 	goDB dba;
@@ -42,7 +43,6 @@ public class GoList extends ListActivity {
         //connect up buttons
         Button newGoButton = (Button) findViewById(R.id.newGoButton);
         newGoButton.setOnClickListener(new View.OnClickListener() {
-			
 			@Override
 			public void onClick(View arg0) {
 				Intent intent = new Intent(getBaseContext(), NewGo.class); //TODO chekc 1st parameter
@@ -93,7 +93,8 @@ public class GoList extends ListActivity {
     	public int getCount() {return diaries.size();} //called by listview
     	public Go getItem(int i) {return diaries.get(i);} //called to get 1 list item
     	public long getItemId(int i) {return i;}
-    	public View getView(int arg0, View arg1, ViewGroup arg2) { //called by listview to get view for 1 list item
+    	public View getView(int position, View arg1, ViewGroup arg2) { //called by listview to get view for 1 list item
+    		final int pos = position;
 	    	final ViewHolder holder;
 	    	View v = arg1;
 	    	if ((v == null) || (v.getTag() == null)) {
@@ -106,7 +107,7 @@ public class GoList extends ListActivity {
 	    	} else {
 	    		holder = (ViewHolder) v.getTag();
 	    	}
-	    	holder.mdiary = getItem(arg0);
+	    	holder.mdiary = getItem(position);
 	    	holder.mTitle.setText(holder.mdiary.Name);
 	    	holder.mDesc.setText(holder.mdiary.Desc);
 	    	Date Today = new Date();
@@ -117,6 +118,15 @@ public class GoList extends ListActivity {
 	    		holder.mDone.setChecked(false);
 	    	}
 	    	v.setTag(holder);
+	    	
+	    	//bind chekcbox clicks
+	    	holder.mDone.setOnCheckedChangeListener(new OnCheckedChangeListener(){
+	    		@Override
+	    		public void onCheckedChanged(CompoundButton b, boolean isChecked){
+	    			Toast.makeText(getBaseContext(), "Checked "+pos , Toast.LENGTH_SHORT).show();
+	    		}
+	    		
+	    	});
 	    	
 	    	return v;
     	}
