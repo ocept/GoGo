@@ -45,7 +45,7 @@ public class goDB {
 			return -1;
 		}
 	}
-	public Cursor getdiaries()
+	public Cursor getGos()
 	{
 		Cursor c = db.query(Constants.TABLE_NAME, null, null,
 		null, null, null, null);

@@ -65,14 +65,14 @@ public class GoList extends ListActivity {
     }
     public class goAdapter extends BaseAdapter {
     	private LayoutInflater mInflater;
-    	private ArrayList<Go> diaries;
+    	private ArrayList<Go> goArray;
     	public goAdapter(Context context) {
 	    	mInflater = LayoutInflater.from(context);
-	    	diaries = new ArrayList<Go>();
+	    	goArray = new ArrayList<Go>();
 	    	getdata();
     	}
     	public void getdata(){ //fetch data from DB
-	    	Cursor c = dba.getdiaries();
+	    	Cursor c = dba.getGos();
 	    	startManagingCursor(c);
 	    	if(c.moveToFirst()){
 		    	do{
@@ -81,7 +81,7 @@ public class GoList extends ListActivity {
 				    	String desc = c.getString(c.getColumnIndex(Constants.CONTENT_NAME));
 				    	Long lastChecked = c.getLong(c.getColumnIndex(Constants.LAST_CHECKED_NAME));
 						Go temp = new Go(title,desc, lastChecked);
-						diaries.add(temp);
+						goArray.add(temp);
 		    		}
 		    		catch(java.lang.RuntimeException ex){
 		    			Log.e(ACTIVITY_SERVICE, "Failed to read go from db", ex);
@@ -90,8 +90,8 @@ public class GoList extends ListActivity {
 				}
 			}
     	@Override
-    	public int getCount() {return diaries.size();} //called by listview
-    	public Go getItem(int i) {return diaries.get(i);} //called to get 1 list item
+    	public int getCount() {return goArray.size();} //called by listview
+    	public Go getItem(int i) {return goArray.get(i);} //called to get 1 list item
     	public long getItemId(int i) {return i;}
     	public View getView(int position, View arg1, ViewGroup arg2) { //called by listview to get view for 1 list item
     		final int pos = position;
@@ -107,11 +107,11 @@ public class GoList extends ListActivity {
 	    	} else {
 	    		holder = (ViewHolder) v.getTag();
 	    	}
-	    	holder.mdiary = getItem(position);
-	    	holder.mTitle.setText(holder.mdiary.Name);
-	    	holder.mDesc.setText(holder.mdiary.Desc);
+	    	holder.mGo = getItem(position);
+	    	holder.mTitle.setText(holder.mGo.Name);
+	    	holder.mDesc.setText(holder.mGo.Desc);
 	    	Date Today = new Date();
-	    	if(new Date(holder.mdiary.LastChecked).after(Today)){
+	    	if(new Date(holder.mGo.LastChecked).after(Today)){
 	    		holder.mDone.setChecked(true);
 	    	}
 	    	else{
@@ -131,7 +131,7 @@ public class GoList extends ListActivity {
 	    	return v;
     	}
     	public class ViewHolder {
-    		Go mdiary;
+    		Go mGo;
     		TextView mTitle;
     		TextView mDesc;
     		CheckBox mDone;
