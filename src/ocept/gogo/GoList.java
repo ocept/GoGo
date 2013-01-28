@@ -117,9 +117,7 @@ public class GoList extends ListActivity {
 	    	Calendar Today = new GregorianCalendar();
 	    	Today.setTime(new Date());
 	    	Today.add(Calendar.HOUR_OF_DAY, -Calendar.HOUR_OF_DAY);
-	    	//Today.set(Calendar.HOUR_OF_DAY, (getResources().getInteger(R.integer.dayTickOverHour))); //set Today to x hours after midnight today
-	    	Today.set(Calendar.MINUTE, 0);
-	    	Today.set(Calendar.SECOND, 0);
+	    	Today.add(Calendar.MINUTE, -Calendar.MINUTE);
 	    	if(new Date(holder.mGo.LastChecked).after(Today.getTime())){
 	    		holder.mDone.setChecked(true);
 	    	}
