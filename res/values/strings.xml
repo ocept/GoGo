@@ -7,5 +7,6 @@
     <string name="newGoButtonText">New Go</string>
     <string name="newGoNameHint">Name</string>
     <string name="newGoDescHint">Description (Optional)</string>
+    <string name="menu_delete">Delete</string>
 
 </resources>
