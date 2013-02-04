@@ -12,7 +12,9 @@ import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.util.Log;
+import android.util.SparseBooleanArray;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -74,9 +76,16 @@ public class GoList extends ListActivity {
     	    public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
     	        // Here you can do something when items are selected/de-selected,
     	        // such as update the title in the CAB
+    			
+    			//hightlight rows
+    			//if(checked) listView.getChildAt(position).setBackgroundColor(Color.DKGRAY);
+    			//else listView.getChildAt(position).setBackgroundColor(Color.TRANSPARENT);
+    			//listView.setSelection(position);
     	    }
 
+    		
     	    @Override
+    	    
     	    public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
     	        // Respond to clicks on the actions in the CAB
     	        switch (item.getItemId()) {
@@ -101,6 +110,8 @@ public class GoList extends ListActivity {
     	    public void onDestroyActionMode(ActionMode mode) {
     	        // Here you can make any necessary updates to the activity when
     	        // the CAB is removed. By default, selected items are deselected/unchecked.
+    	    	SparseBooleanArray b =  listView.getCheckedItemPositions();
+    	    	int a = 6;
     	    }
 
     	    @Override
