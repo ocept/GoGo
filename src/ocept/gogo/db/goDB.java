@@ -47,14 +47,14 @@ public class goDB {
 			return -1;
 		}
 	}
-	public long checkGo(String id, boolean isChecked){
+	public long checkGo(int id, boolean isChecked){
 		try{
 		ContentValues newCheckValue = new ContentValues();
 		if(isChecked)
 			newCheckValue.put(Constants.LAST_CHECKED_NAME, new Date().getTime());
 		else
 			newCheckValue.put(Constants.LAST_CHECKED_NAME, 0);
-		String sFilter = Constants.KEY_ID+"= " + id;
+		String sFilter = Constants.KEY_ID+"= " + Integer.toString(id);
 		db.update(Constants.TABLE_NAME, newCheckValue, sFilter, null);
 		return 1;
 		}

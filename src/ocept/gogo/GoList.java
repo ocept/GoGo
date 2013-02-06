@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import ocept.gogo.db.Constants;
 import ocept.gogo.db.goDB;
@@ -91,16 +92,16 @@ public class GoList extends ListActivity {
     	        switch (item.getItemId()) {
     	            case R.id.menu_delete:
     	            	SparseBooleanArray checked =  listView.getCheckedItemPositions();
-    	            	int ids[];
+    	            	List<Integer> ids = new ArrayList<Integer>();
     	    	    	for(int i = 0; i < checked.size(); i++)
     	    	    	{
     	    	    		if(checked.valueAt(i)){
-    	    	    			ViewHolder v = (ViewHolder) listView.getChildAt(checked.keyAt(0)).getTag();   
-    	    	    			ids[i] = v.mGo.KeyId;
+    	    	    			ViewHolder v = (ViewHolder) listView.getChildAt(checked.keyAt(i)).getTag();   
+    	    	    			ids.add(v.mGo.KeyId);
     	    	    		}
     	    	    	}
     	            	
-    	                //deleteGos(ids);
+    	                deleteGos(ids);
     	                mode.finish(); // Action picked, so close the CAB
     	                return true;
     	            default:
@@ -137,7 +138,7 @@ public class GoList extends ListActivity {
     	});
     }
     
-    protected void deleteGos(int[] gos) {
+    protected void deleteGos(List<Integer> ids) {
 
 	}
 
@@ -170,7 +171,7 @@ public class GoList extends ListActivity {
 				    	String title = c.getString(c.getColumnIndex(Constants.TITLE_NAME));
 				    	String desc = c.getString(c.getColumnIndex(Constants.CONTENT_NAME));
 				    	Long lastChecked = c.getLong(c.getColumnIndex(Constants.LAST_CHECKED_NAME));
-				    	String id = c.getString(c.getColumnIndex(Constants.KEY_ID));
+				    	int id = c.getInt(c.getColumnIndex(Constants.KEY_ID));
 						Go temp = new Go(title,desc, lastChecked, id);
 						goArray.add(temp);
 		    		}
