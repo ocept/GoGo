@@ -27,6 +27,7 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.Checkable;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ListView;
@@ -78,9 +79,8 @@ public class GoList extends ListActivity {
     	        // such as update the title in the CAB
     			
     			//hightlight rows
-    			//if(checked) listView.getChildAt(position).setBackgroundColor(Color.DKGRAY);
-    			//else listView.getChildAt(position).setBackgroundColor(Color.TRANSPARENT);
-    			//listView.setSelection(position);
+    			if(checked) listView.getChildAt(position).setBackgroundColor(Color.DKGRAY);
+    			else listView.getChildAt(position).setBackgroundColor(Color.WHITE);    			
     	    }
 
     		
@@ -90,7 +90,17 @@ public class GoList extends ListActivity {
     	        // Respond to clicks on the actions in the CAB
     	        switch (item.getItemId()) {
     	            case R.id.menu_delete:
-    	                //TODO deleteSelectedItems();
+    	            	SparseBooleanArray checked =  listView.getCheckedItemPositions();
+    	            	int ids[];
+    	    	    	for(int i = 0; i < checked.size(); i++)
+    	    	    	{
+    	    	    		if(checked.valueAt(i)){
+    	    	    			ViewHolder v = (ViewHolder) listView.getChildAt(checked.keyAt(0)).getTag();   
+    	    	    			ids[i] = v.mGo.KeyId;
+    	    	    		}
+    	    	    	}
+    	            	
+    	                //deleteGos(ids);
     	                mode.finish(); // Action picked, so close the CAB
     	                return true;
     	            default:
@@ -110,8 +120,12 @@ public class GoList extends ListActivity {
     	    public void onDestroyActionMode(ActionMode mode) {
     	        // Here you can make any necessary updates to the activity when
     	        // the CAB is removed. By default, selected items are deselected/unchecked.
-    	    	SparseBooleanArray b =  listView.getCheckedItemPositions();
-    	    	int a = 6;
+    	    	SparseBooleanArray checked =  listView.getCheckedItemPositions();
+    	    	for(int i = 0; i < checked.size(); i++)
+    	    	{
+    	    		if(checked.valueAt(i))
+    	    				listView.getChildAt(checked.keyAt(i)).setBackgroundColor(Color.WHITE);   
+    	    	}
     	    }
 
     	    @Override
@@ -123,7 +137,11 @@ public class GoList extends ListActivity {
     	});
     }
     
-    @Override
+    protected void deleteGos(int[] gos) {
+
+	}
+
+	@Override
     protected void onResume(){
     	//myAdapter.notifyDataSetChanged();
     	super.onResume();
@@ -184,6 +202,7 @@ public class GoList extends ListActivity {
 	    	holder.mTitle.setText(holder.mGo.Name);
 	    	holder.mDesc.setText(holder.mGo.Desc);
 	    	
+	    	//only check if time of last check is today
 	    	Calendar Today = new GregorianCalendar();
 	    	Today.setTime(new Date());
 	    	Today.add(Calendar.HOUR_OF_DAY, -Calendar.HOUR_OF_DAY);
@@ -208,13 +227,14 @@ public class GoList extends ListActivity {
 	    	
 	    	return v;
     	}
-    	public class ViewHolder {
-    		Go mGo;
-    		TextView mTitle;
-    		TextView mDesc;
-    		CheckBox mDone;
-		}
+    	
     }
+	public class ViewHolder{
+		Go mGo;
+		TextView mTitle;
+		TextView mDesc;
+		CheckBox mDone;
+	}
 }
 
 
