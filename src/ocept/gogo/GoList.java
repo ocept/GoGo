@@ -101,7 +101,7 @@ public class GoList extends ListActivity {
     	    	    		}
     	    	    	}
     	            	
-    	                deleteGos(ids);
+    	    			dba.deleteGos(ids);
     	                mode.finish(); // Action picked, so close the CAB
     	                return true;
     	            default:
@@ -138,10 +138,6 @@ public class GoList extends ListActivity {
     	});
     }
     
-    protected void deleteGos(List<Integer> ids) {
-
-	}
-
 	@Override
     protected void onResume(){
     	//myAdapter.notifyDataSetChanged();

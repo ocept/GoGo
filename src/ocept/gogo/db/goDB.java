@@ -1,5 +1,8 @@
 package ocept.gogo.db;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 
 import ocept.gogo.Go;
 import android.content.ContentValues;
@@ -69,5 +72,19 @@ public class goDB {
 		Cursor c = db.query(Constants.TABLE_NAME, null, null,
 		null, null, null, null);
 		return c;
+	}
+	public long deleteGos(List<Integer> ids)
+	{
+		try{
+			for(Iterator<Integer> i = ids.iterator(); i.hasNext();){
+				db.delete(Constants.TABLE_NAME, Constants.KEY_ID + "=" + i.next().toString(), null);
+			}
+			return 1;
+		}
+		catch(SQLiteException ex) {
+		Log.v("Delete from database exception caught",
+				ex.getMessage());
+			return -1;
+		}
 	}
 }
