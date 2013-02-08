@@ -24,24 +24,36 @@
         android:ems="10"
         android:hint="@string/newGoDescHint" />
 
-    <Button
-        android:id="@+id/newGoCancelButton"
+    <NumberPicker
+        android:id="@+id/bountyPicker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
         android:layout_below="@+id/newGoDesc"
-        android:layout_marginLeft="68dp"
-        android:layout_marginTop="15dp"
-        android:text="Cancel" />
+        android:layout_centerHorizontal="true"
+        android:layout_margin="10dp" />
 
-    <Button
-        android:id="@+id/newGoOkButton"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/newGoCancelButton"
-        android:layout_alignBottom="@+id/newGoCancelButton"
-        android:layout_marginLeft="14dp"
-        android:layout_toRightOf="@+id/newGoCancelButton"
-        android:text="OK" />
+        android:layout_below="@+id/bountyPicker"
+        android:layout_centerHorizontal="true"
+        android:baselineAligned="_baseline" >
+
+        <Button
+            android:id="@+id/newGoCancelButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:layout_weight="1"
+            android:text="@string/cancel" />
+
+        <Button
+            android:id="@+id/newGoOkButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/ok" />
+    </LinearLayout>
 
 </RelativeLayout>

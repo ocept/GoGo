@@ -8,5 +8,7 @@
     <string name="newGoNameHint">Name</string>
     <string name="newGoDescHint">Description (Optional)</string>
     <string name="menu_delete">Delete</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">OK</string>
 
 </resources>
