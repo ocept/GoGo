@@ -1,16 +1,17 @@
 package ocept.gogo;
 
-import java.util.Date;
-
 import ocept.gogo.db.*;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.NumberPicker;
 
 
 public class NewGo extends Activity {
+	private static final int MIN_BOUNTY = 0;
+	private static final int MAX_BOUNTY = 10;
 	goDB dba;
 	
 	@Override
@@ -42,6 +43,10 @@ public class NewGo extends Activity {
 				closeActivity();
 			}
 		});
+        
+        NumberPicker np = (NumberPicker) findViewById(R.id.bountyPicker);
+        np.setMaxValue(MAX_BOUNTY);
+        np.setMinValue(MIN_BOUNTY);
 	}
 	private void saveGo(){
 		//get go data from View
@@ -49,7 +54,8 @@ public class NewGo extends Activity {
 		EditText name = (EditText) findViewById(R.id.newGoName);
 		newGo.Name = name.getText().toString();
 		newGo.Desc = ((EditText) findViewById(R.id.newGoDesc)).getText().toString();
-		newGo.LastChecked = (long) 0;
+		newGo.LastChecked = (long) 0; //unchecked on creation so set date to 0
+		newGo.Bounty = ((NumberPicker) findViewById(R.id.bountyPicker)).getValue();
 		
 		//open and enter into db
         dba.open();

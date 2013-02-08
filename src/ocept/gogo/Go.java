@@ -8,16 +8,13 @@ public class Go {
 	public String Desc;
 	public Long LastChecked;
 	public int KeyId;
-	public Go(String name, String desc, long dateLong){
-		Name = name;
-		Desc = desc;
-		LastChecked = dateLong;
-	}
-	public Go(String name, String desc, long dateLong, int id){
+	public int Bounty;
+	public Go(String name, String desc, long dateLong, int id, int bounty){
 		Name = name;
 		Desc = desc;
 		LastChecked = dateLong;
 		KeyId = id;
+		Bounty = bounty;
 	}
 	public Go(){}
 }

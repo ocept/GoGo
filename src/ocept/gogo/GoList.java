@@ -168,7 +168,8 @@ public class GoList extends ListActivity {
 				    	String desc = c.getString(c.getColumnIndex(Constants.CONTENT_NAME));
 				    	Long lastChecked = c.getLong(c.getColumnIndex(Constants.LAST_CHECKED_NAME));
 				    	int id = c.getInt(c.getColumnIndex(Constants.KEY_ID));
-						Go temp = new Go(title,desc, lastChecked, id);
+				    	int bounty = c.getInt(c.getColumnIndex(Constants.BOUNTY_NAME));
+						Go temp = new Go(title,desc, lastChecked, id, bounty);
 						goArray.add(temp);
 		    		}
 		    		catch(java.lang.RuntimeException ex){

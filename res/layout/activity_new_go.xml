@@ -37,8 +37,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/bountyPicker"
-        android:layout_centerHorizontal="true"
-        android:baselineAligned="_baseline" >
+        android:layout_centerHorizontal="true">
 
         <Button
             android:id="@+id/newGoCancelButton"

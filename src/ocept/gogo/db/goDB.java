@@ -1,5 +1,4 @@
 package ocept.gogo.db;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -41,7 +40,8 @@ public class goDB {
 			ContentValues newTaskValue = new ContentValues();
 			newTaskValue.put(Constants.TITLE_NAME, go.Name);
 			newTaskValue.put(Constants.CONTENT_NAME, go.Desc);
-			newTaskValue.put(Constants.LAST_CHECKED_NAME, go.LastChecked); //save last checked date as 0
+			newTaskValue.put(Constants.LAST_CHECKED_NAME, go.LastChecked);
+			newTaskValue.put(Constants.BOUNTY_NAME, go.Bounty);
 			return db.insert(Constants.TABLE_NAME, null, newTaskValue);
 		}
 		catch(SQLiteException ex) {
