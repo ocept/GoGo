@@ -25,11 +25,9 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView.MultiChoiceModeListener;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.Checkable;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ListView;
@@ -42,7 +40,8 @@ public class GoList extends ListActivity {
 	public String title;
 	public String content;
 	public String recorddate;
-	public static final String TOTAL_BOUNTY_NAME = "TotalBounty";
+	public static final String BOUNTY_PREFS = "BountyPrefs";
+	public static final String TOTAL_BOUNTY_KEY = "TotalBounty";
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,8 +67,8 @@ public class GoList extends ListActivity {
         initCAM();
         
         //load and display total bounty
-        SharedPreferences bountyPrefs = getSharedPreferences(TOTAL_BOUNTY_NAME, MODE_PRIVATE);
-        Integer bounty = bountyPrefs.getInt("bounty", 0);
+        SharedPreferences bountyPrefs = getSharedPreferences(BOUNTY_PREFS, MODE_PRIVATE);
+        Integer bounty = bountyPrefs.getInt(TOTAL_BOUNTY_KEY, 0);
         
         TextView bountyDisplay = (TextView) findViewById(R.id.totalBountyDisplay);
         bountyDisplay.setText(Integer.toString(bounty));
@@ -229,7 +228,7 @@ public class GoList extends ListActivity {
 	    		@Override
 	    		public void onCheckedChanged(CompoundButton b, boolean isChecked){
 	    			Toast.makeText(getBaseContext(), "Checked "+pos , Toast.LENGTH_SHORT).show();
-	    			dba.checkGo(holder.mGo.KeyId, isChecked);
+	    			dba.checkGo(holder.mGo.KeyId, isChecked, holder.mGo.Bounty);
 	    		}
 	    		
 	    	});

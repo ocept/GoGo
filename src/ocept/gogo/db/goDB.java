@@ -4,8 +4,11 @@ import java.util.Iterator;
 import java.util.List;
 
 import ocept.gogo.Go;
+import ocept.gogo.GoList;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
@@ -50,16 +53,27 @@ public class goDB {
 			return -1;
 		}
 	}
-	public long checkGo(int id, boolean isChecked){
+	public long checkGo(int id, boolean isChecked, int goBounty){
 		try{
-		ContentValues newCheckValue = new ContentValues();
-		if(isChecked)
-			newCheckValue.put(Constants.LAST_CHECKED_NAME, new Date().getTime());
-		else
-			newCheckValue.put(Constants.LAST_CHECKED_NAME, 0);
-		String sFilter = Constants.KEY_ID+"= " + Integer.toString(id);
-		db.update(Constants.TABLE_NAME, newCheckValue, sFilter, null);
-		return 1;
+			ContentValues newCheckValue = new ContentValues();
+			SharedPreferences bountyPrefs = context.getSharedPreferences(GoList.BOUNTY_PREFS, 0);
+			int totalBounty = bountyPrefs.getInt(GoList.TOTAL_BOUNTY_KEY, 0);
+			
+			if(isChecked){
+				newCheckValue.put(Constants.LAST_CHECKED_NAME, new Date().getTime());
+				totalBounty += goBounty;
+			}
+			else{
+				newCheckValue.put(Constants.LAST_CHECKED_NAME, 0);
+				totalBounty -= goBounty;
+			}
+			Editor bountyPrefsEdit = bountyPrefs.edit();
+			bountyPrefsEdit.putInt(GoList.TOTAL_BOUNTY_KEY, totalBounty);
+			bountyPrefsEdit.apply();
+			
+			String sFilter = Constants.KEY_ID+"= " + Integer.toString(id);
+			db.update(Constants.TABLE_NAME, newCheckValue, sFilter, null);
+			return 1;
 		}
 		catch(SQLiteException ex){
 			Log.e("Update db exception", ex.getMessage());
