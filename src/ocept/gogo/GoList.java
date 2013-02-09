@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.util.Log;
@@ -41,6 +42,7 @@ public class GoList extends ListActivity {
 	public String title;
 	public String content;
 	public String recorddate;
+	public static final String TOTAL_BOUNTY_NAME = "TotalBounty";
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,11 +61,18 @@ public class GoList extends ListActivity {
 			public void onClick(View arg0) {
 				Intent intent = new Intent(getBaseContext(), NewGo.class); //TODO chekc 1st parameter
 				startActivity(intent);
-			}
+			} 
 		});
         
         //set up context menu
         initCAM();
+        
+        //load and display total bounty
+        SharedPreferences bountyPrefs = getSharedPreferences(TOTAL_BOUNTY_NAME, MODE_PRIVATE);
+        Integer bounty = bountyPrefs.getInt("bounty", 0);
+        
+        TextView bountyDisplay = (TextView) findViewById(R.id.totalBountyDisplay);
+        bountyDisplay.setText(Integer.toString(bounty));
     }
     
     private void initCAM()
