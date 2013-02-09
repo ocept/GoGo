@@ -192,6 +192,7 @@ public class GoList extends ListActivity {
 		    	holder.mTitle = (TextView)v.findViewById(R.id.name);
 		    	holder.mDesc = (TextView)v.findViewById(R.id.descText);
 		    	holder.mDone = (CheckBox)v.findViewById(R.id.checkDone);
+		    	holder.mBounty = (TextView)v.findViewById(R.id.bountyDisplay);
 		    	v.setTag(holder);
 	    	} else {
 	    		holder = (ViewHolder) v.getTag();
@@ -199,6 +200,7 @@ public class GoList extends ListActivity {
 	    	holder.mGo = getItem(position);
 	    	holder.mTitle.setText(holder.mGo.Name);
 	    	holder.mDesc.setText(holder.mGo.Desc);
+	    	holder.mBounty.setText(Integer.toString(holder.mGo.Bounty));
 	    	
 	    	//only check if time of last check is today
 	    	Calendar Today = new GregorianCalendar();
@@ -232,6 +234,7 @@ public class GoList extends ListActivity {
 		TextView mTitle;
 		TextView mDesc;
 		CheckBox mDone;
+		TextView mBounty;
 	}
 }
 

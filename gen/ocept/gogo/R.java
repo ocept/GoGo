@@ -12,9 +12,10 @@ public final class R {
     }
     public static final class color {
         public static final int black=0x7f040001;
+        public static final int blue=0x7f040004;
         public static final int green=0x7f040003;
         public static final int red=0x7f040002;
-        public static final int row_selected=0x7f040004;
+        public static final int row_selected=0x7f040005;
         public static final int white=0x7f040000;
     }
     public static final class drawable {
@@ -25,18 +26,21 @@ public final class R {
         public static final int row_selected=0x7f020004;
     }
     public static final class id {
-        public static final int bountyPicker=0x7f080003;
-        public static final int checkDone=0x7f080009;
-        public static final int descText=0x7f080008;
-        public static final int item1=0x7f08000a;
-        public static final int linearLayout1=0x7f080004;
-        public static final int menu_delete=0x7f08000b;
-        public static final int name=0x7f080007;
+        public static final int bountyDisplay=0x7f08000a;
+        public static final int bountyPicker=0x7f080006;
+        public static final int checkDone=0x7f08000b;
+        public static final int descText=0x7f08000c;
+        public static final int item1=0x7f08000d;
+        public static final int linearLayout1=0x7f080001;
+        public static final int menu_delete=0x7f08000e;
+        public static final int name=0x7f080009;
         public static final int newGoButton=0x7f080000;
-        public static final int newGoCancelButton=0x7f080005;
-        public static final int newGoDesc=0x7f080002;
-        public static final int newGoName=0x7f080001;
-        public static final int newGoOkButton=0x7f080006;
+        public static final int newGoCancelButton=0x7f080007;
+        public static final int newGoDesc=0x7f080005;
+        public static final int newGoName=0x7f080004;
+        public static final int newGoOkButton=0x7f080008;
+        public static final int totalBountyDisplay=0x7f080003;
+        public static final int totalBountyLabel=0x7f080002;
     }
     public static final class layout {
         public static final int activity_go_list=0x7f030000;

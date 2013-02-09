@@ -4,29 +4,49 @@
     android:layout_height="match_parent"
     tools:context=".GoList" >
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="50dp"
-    android:orientation="vertical" >
+    <Button
+        android:id="@+id/newGoButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_weight="1"
+        android:text="@string/newGoButtonText" />
 
-    <ListView
-        android:id="@android:id/list"
+    <LinearLayout
+        android:id="@+id/linearLayout1"
         android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:clickable="true"
-        android:longClickable="true" >
-		
-    </ListView>
-</LinearLayout>
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" >
 
-<Button
-    android:id="@+id/newGoButton"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_alignParentBottom="true"
-    android:layout_alignParentLeft="true"
-    android:layout_weight="1"
-    android:text="@string/newGoButtonText" />
+        <TextView
+            android:id="@+id/totalBountyLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total Bounty:" />
+
+        <TextView
+            android:id="@+id/totalBountyDisplay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bounty not found!" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/linearLayout1"
+        android:orientation="vertical" >
+
+        <ListView
+            android:id="@android:id/list"
+            android:layout_width="match_parent"
+            android:layout_height="361dp"
+            android:clickable="true"
+            android:longClickable="true" >
+        </ListView>
+    </LinearLayout>
 
 </RelativeLayout>
