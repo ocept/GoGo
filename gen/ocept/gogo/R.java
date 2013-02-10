@@ -26,10 +26,10 @@ public final class R {
         public static final int row_selected=0x7f020004;
     }
     public static final class id {
-        public static final int bountyDisplay=0x7f08000a;
+        public static final int bountyDisplay=0x7f08000b;
         public static final int bountyPicker=0x7f080006;
-        public static final int checkDone=0x7f08000b;
-        public static final int descText=0x7f08000c;
+        public static final int checkDone=0x7f08000c;
+        public static final int descText=0x7f08000a;
         public static final int item1=0x7f08000d;
         public static final int linearLayout1=0x7f080001;
         public static final int menu_delete=0x7f08000e;

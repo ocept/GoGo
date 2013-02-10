@@ -199,7 +199,8 @@ public class GoList extends ListActivity {
 		    	holder = new ViewHolder();
 		    	holder.mTitle = (TextView)v.findViewById(R.id.name);
 		    	holder.mDesc = (TextView)v.findViewById(R.id.descText);
-		    	holder.mDone = (CheckBox)v.findViewById(R.id.checkDone);
+		    	View cb = v.findViewById(R.id.checkDone);
+		    	holder.mDone = (CheckBox) cb;
 		    	holder.mBounty = (TextView)v.findViewById(R.id.bountyDisplay);
 		    	v.setTag(holder);
 	    	} else {
