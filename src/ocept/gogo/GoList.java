@@ -218,6 +218,7 @@ public class GoList extends ListActivity {
 	    	Today.add(Calendar.MINUTE, -Calendar.MINUTE);
 	    	if(new Date(holder.mGo.LastChecked).after(Today.getTime())){
 	    		holder.mDone.setChecked(true);
+	    		v.setBackgroundColor(getResources().getColor(R.color.doneBG));
 	    	}
 	    	else{
 	    		holder.mDone.setChecked(false);

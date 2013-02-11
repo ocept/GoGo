@@ -13,9 +13,10 @@ public final class R {
     public static final class color {
         public static final int black=0x7f040001;
         public static final int blue=0x7f040004;
+        public static final int doneBG=0x7f040005;
         public static final int green=0x7f040003;
         public static final int red=0x7f040002;
-        public static final int row_selected=0x7f040005;
+        public static final int row_selected=0x7f040006;
         public static final int white=0x7f040000;
     }
     public static final class drawable {
