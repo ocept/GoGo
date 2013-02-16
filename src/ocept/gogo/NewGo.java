@@ -64,7 +64,7 @@ public class NewGo extends Activity {
 		
 		//close activity
 		//GoList.this.myAdapter.notifyDataSetChanged();
-		GoList.myAdapter.notifyDataSetInvalidated();
+		GoList.goListAdapter.notifyDataSetInvalidated();
 		this.finish();
 	}
 	private void closeActivity()

@@ -36,7 +36,7 @@ import android.widget.Toast;
 
 public class GoList extends ListActivity {
 	goDB dba;
-	public static goAdapter myAdapter;
+	public static goAdapter goListAdapter;
 	public String title;
 	public String content;
 	public String recorddate;
@@ -50,8 +50,8 @@ public class GoList extends ListActivity {
     	setContentView(R.layout.activity_go_list);
         super.onCreate(savedInstanceState);
         
-        myAdapter = new goAdapter(this);
-        this.setListAdapter(myAdapter);
+        goListAdapter = new goAdapter(this);
+        this.setListAdapter(goListAdapter);
         
         //connect up buttons
         Button newGoButton = (Button) findViewById(R.id.newGoButton);
@@ -78,7 +78,6 @@ public class GoList extends ListActivity {
     {
     	final ListView listView = getListView();
     	
-    	
     	listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
     	listView.setMultiChoiceModeListener(new MultiChoiceModeListener() {
 
@@ -89,12 +88,11 @@ public class GoList extends ListActivity {
     			
     			//hightlight rows
     			if(checked) listView.getChildAt(position).setBackgroundColor(Color.DKGRAY);
-    			else listView.getChildAt(position).setBackgroundColor(Color.WHITE);    			
+    			else listView.getChildAt(position).setBackgroundColor(Color.WHITE); //TODO: fix rows not being highlighted on touch
     	    }
 
     		
     	    @Override
-    	    
     	    public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
     	        // Respond to clicks on the actions in the CAB
     	        switch (item.getItemId()) {
@@ -148,7 +146,7 @@ public class GoList extends ListActivity {
     
 	@Override
     protected void onResume(){
-    	//myAdapter.notifyDataSetChanged();
+    	goListAdapter.notifyDataSetChanged();
     	super.onResume();
     }
 
@@ -211,17 +209,19 @@ public class GoList extends ListActivity {
 	    	holder.mDesc.setText(holder.mGo.Desc);
 	    	holder.mBounty.setText(Integer.toString(holder.mGo.Bounty));
 	    	
-	    	//only check if time of last check is today
+	    	//only check if time of last check is today //TODO: debug checks showing up when they shouldnt
 	    	Calendar Today = new GregorianCalendar();
 	    	Today.setTime(new Date());
 	    	Today.add(Calendar.HOUR_OF_DAY, -Calendar.HOUR_OF_DAY);
 	    	Today.add(Calendar.MINUTE, -Calendar.MINUTE);
+	    	holder.mDone.setOnCheckedChangeListener(null); //stop drawing the checkbox from triggering the listener if already defined
 	    	if(new Date(holder.mGo.LastChecked).after(Today.getTime())){
 	    		holder.mDone.setChecked(true);
 	    		v.setBackgroundColor(getResources().getColor(R.color.doneBG));
 	    	}
 	    	else{
 	    		holder.mDone.setChecked(false);
+	    		v.setBackgroundColor(getResources().getColor(R.color.white)); 
 	    	}
 	    	v.setTag(holder);
 	    	
