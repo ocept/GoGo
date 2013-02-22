@@ -75,16 +75,20 @@ public class GoList extends ListActivity {
         
         //set up context menu
         initCAM();
-        
+        updateBounty();
+
+    }
+    
+    private void updateBounty() {
         //load and display total bounty
         SharedPreferences bountyPrefs = getSharedPreferences(BOUNTY_PREFS, MODE_PRIVATE);
         Integer bounty = bountyPrefs.getInt(TOTAL_BOUNTY_KEY, 0);
         
         TextView bountyDisplay = (TextView) findViewById(R.id.totalBountyDisplay);
         bountyDisplay.setText(Integer.toString(bounty));
-    }
-    
-    private void initCAM()
+	}
+
+	private void initCAM()
     {
     	final ListView listView = getListView();
     	
@@ -235,9 +239,9 @@ public class GoList extends ListActivity {
 	    	holder.mDone.setOnCheckedChangeListener(new OnCheckedChangeListener(){
 	    		@Override
 	    		public void onCheckedChanged(CompoundButton b, boolean isChecked){
-	    			Toast.makeText(getBaseContext(), "Checked "+pos , Toast.LENGTH_SHORT).show();
 	    			dba.checkGo(holder.mGo.KeyId, isChecked, holder.mGo.Bounty);
-	    			//refreshListView();
+	    			refreshListView();
+	    			updateBounty();
 	    		}
 	    		
 	    	});
