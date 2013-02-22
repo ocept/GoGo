@@ -69,7 +69,6 @@ public class GoList extends ListActivity {
 			@Override
 			public void onClick(View v) {
 				refreshListView();
-				
 			}
 		});
         
@@ -156,8 +155,9 @@ public class GoList extends ListActivity {
     }
     
     public void refreshListView(){ //refresh the listview when data is altered
+    	//this redraws the whole list with a new adapter, is there a better way?
         goListAdapter = new goAdapter(this);
-        this.setListAdapter(goListAdapter);
+        this.setListAdapter(goListAdapter); 
     }
 
     @Override
