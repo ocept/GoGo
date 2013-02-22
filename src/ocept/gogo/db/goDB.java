@@ -1,7 +1,10 @@
 package ocept.gogo.db;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Observable;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Observer;
 
 import ocept.gogo.Go;
 import ocept.gogo.GoList;
@@ -14,15 +17,42 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.util.Log;
 
-public class goDB {
+public class goDB extends Observable{
 	private SQLiteDatabase db;
 	private final Context context;
 	private final goDBHelper dbhelper;
+	private static ArrayList<Observer> observers = new ArrayList<Observer>();
 	public goDB(Context c){
 		context = c;
 		dbhelper = new goDBHelper(context, Constants.DATABASE_NAME, null,
 		Constants.DATABASE_VERSION);
 	}
+    @Override
+    public void addObserver(Observer observer) {
+           observers.add(observer);
+
+    }
+
+    @Override
+    public void deleteObserver(Observer observer) {
+           observers.remove(observer);
+
+    }
+    @Override
+    public void notifyObservers() {
+           for (Observer ob : observers) {
+                  System.out.println("Notifying observers on data change ");
+                  try{
+                	  ob.update(this, null);
+                  }
+                  catch(java.util.ConcurrentModificationException ex){
+                	  Log.w("multiple observers modifying at once?", ex);
+                  }
+                  
+           }
+
+    }
+
 	public void close()
 	{
 		db.close();
@@ -45,7 +75,9 @@ public class goDB {
 			newTaskValue.put(Constants.CONTENT_NAME, go.Desc);
 			newTaskValue.put(Constants.LAST_CHECKED_NAME, go.LastChecked);
 			newTaskValue.put(Constants.BOUNTY_NAME, go.Bounty);
-			return db.insert(Constants.TABLE_NAME, null, newTaskValue);
+			long returnValue =  db.insert(Constants.TABLE_NAME, null, newTaskValue);
+			notifyObservers();
+			return returnValue;
 		}
 		catch(SQLiteException ex) {
 		Log.v("Insert into database exception caught",

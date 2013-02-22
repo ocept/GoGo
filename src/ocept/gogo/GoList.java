@@ -5,6 +5,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 import ocept.gogo.db.Constants;
 import ocept.gogo.db.goDB;
@@ -50,8 +52,7 @@ public class GoList extends ListActivity {
     	setContentView(R.layout.activity_go_list);
         super.onCreate(savedInstanceState);
         
-        goListAdapter = new goAdapter(this);
-        this.setListAdapter(goListAdapter);
+        refreshListView();
         
         //connect up buttons
         Button newGoButton = (Button) findViewById(R.id.newGoButton);
@@ -158,6 +159,7 @@ public class GoList extends ListActivity {
     	//this redraws the whole list with a new adapter, is there a better way?
         goListAdapter = new goAdapter(this);
         this.setListAdapter(goListAdapter); 
+        dba.addObserver(goListAdapter); //TODO will end up with multiple reduntent observers causing errors
     }
 
     @Override
@@ -166,13 +168,17 @@ public class GoList extends ListActivity {
         getMenuInflater().inflate(R.menu.activity_go_list, menu);
         return true;
     }
-    public class goAdapter extends BaseAdapter {
+    public class goAdapter extends BaseAdapter implements Observer{
     	private LayoutInflater mInflater;
     	private ArrayList<Go> goArray;
     	public goAdapter(Context context) {
 	    	mInflater = LayoutInflater.from(context);
 	    	goArray = new ArrayList<Go>();
 	    	getdata();
+    	}
+    	@Override
+    	public void update(Observable a, Object b){
+    		refreshListView();	
     	}
     	public void getdata(){ //fetch data from DB
 	    	Cursor c = dba.getGos();
