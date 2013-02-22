@@ -38,5 +38,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/newGoButtonText" />
+	    
+	   	<Button
+        android:id="@+id/refreshList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Refresh List" />
 
 </LinearLayout>

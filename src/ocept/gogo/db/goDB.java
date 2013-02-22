@@ -73,6 +73,7 @@ public class goDB {
 			
 			String sFilter = Constants.KEY_ID+"= " + Integer.toString(id);
 			db.update(Constants.TABLE_NAME, newCheckValue, sFilter, null);
+			
 			return 1;
 		}
 		catch(SQLiteException ex){

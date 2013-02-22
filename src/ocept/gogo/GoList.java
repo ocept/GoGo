@@ -63,6 +63,16 @@ public class GoList extends ListActivity {
 			} 
 		});
         
+        Button refreshButton = (Button) findViewById(R.id.refreshList);
+        refreshButton.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				refreshListView();
+				
+			}
+		});
+        
         //set up context menu
         initCAM();
         
@@ -83,10 +93,7 @@ public class GoList extends ListActivity {
 
     		@Override
     	    public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
-    	        // Here you can do something when items are selected/de-selected,
-    	        // such as update the title in the CAB
-    			
-    			//hightlight rows
+    	        //hightlight rows
     			if(checked) listView.getChildAt(position).setBackgroundColor(Color.DKGRAY);
     			else listView.getChildAt(position).setBackgroundColor(Color.WHITE); //TODO: fix rows not being highlighted on touch
     	    }
@@ -99,7 +106,7 @@ public class GoList extends ListActivity {
     	            case R.id.menu_delete:
     	            	SparseBooleanArray checked =  listView.getCheckedItemPositions();
     	            	List<Integer> ids = new ArrayList<Integer>();
-    	    	    	for(int i = 0; i < checked.size(); i++)
+    	    	    	for(int i = 0; i < checked.size(); i++) //get selected items
     	    	    	{
     	    	    		if(checked.valueAt(i)){
     	    	    			ViewHolder v = (ViewHolder) listView.getChildAt(checked.keyAt(i)).getTag();   
@@ -107,7 +114,8 @@ public class GoList extends ListActivity {
     	    	    		}
     	    	    	}
     	            	
-    	    			dba.deleteGos(ids);
+    	    			dba.deleteGos(ids); //delete selected
+    	    			refreshListView(); //update listview to remove deleted items
     	                mode.finish(); // Action picked, so close the CAB
     	                return true;
     	            default:
@@ -125,8 +133,7 @@ public class GoList extends ListActivity {
     	    
     	    @Override
     	    public void onDestroyActionMode(ActionMode mode) {
-    	        // Here you can make any necessary updates to the activity when
-    	        // the CAB is removed. By default, selected items are deselected/unchecked.
+    	        // Run when context bar is removed, unhighlights rows
     	    	SparseBooleanArray checked =  listView.getCheckedItemPositions();
     	    	for(int i = 0; i < checked.size(); i++)
     	    	{
@@ -144,10 +151,9 @@ public class GoList extends ListActivity {
     	});
     }
     
-	@Override
-    protected void onResume(){
-    	goListAdapter.notifyDataSetChanged();
-    	super.onResume();
+    public void refreshListView(){ //refresh the listview when data is altered
+        goListAdapter = new goAdapter(this);
+        this.setListAdapter(goListAdapter);
     }
 
     @Override
@@ -231,6 +237,7 @@ public class GoList extends ListActivity {
 	    		public void onCheckedChanged(CompoundButton b, boolean isChecked){
 	    			Toast.makeText(getBaseContext(), "Checked "+pos , Toast.LENGTH_SHORT).show();
 	    			dba.checkGo(holder.mGo.KeyId, isChecked, holder.mGo.Bounty);
+	    			//refreshListView();
 	    		}
 	    		
 	    	});
