@@ -157,6 +157,9 @@ public class GoList extends ListActivity {
     
     public void refreshListView(){ //refresh the listview when data is altered
     	//this redraws the whole list with a new adapter, is there a better way?
+    	if(goListAdapter != null){
+    		dba.deleteObserver(goListAdapter); //remove observer before redefining
+    	}
         goListAdapter = new goAdapter(this);
         this.setListAdapter(goListAdapter); 
         dba.addObserver(goListAdapter); //TODO will end up with multiple reduntent observers causing errors
