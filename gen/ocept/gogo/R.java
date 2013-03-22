@@ -27,21 +27,22 @@ public final class R {
         public static final int row_selected=0x7f020004;
     }
     public static final class id {
-        public static final int bountyDisplay=0x7f09000d;
-        public static final int bountyPicker=0x7f090007;
+        public static final int bountyDisplay=0x7f09000e;
+        public static final int bountyGoalTarget=0x7f090003;
+        public static final int bountyPicker=0x7f090008;
         public static final int bountyTargetLabel=0x7f090002;
-        public static final int checkDone=0x7f09000e;
-        public static final int descText=0x7f09000c;
-        public static final int linearLayout1=0x7f090008;
-        public static final int menu_delete=0x7f090010;
-        public static final int name=0x7f09000b;
-        public static final int newGoButton=0x7f090003;
-        public static final int newGoCancelButton=0x7f090009;
-        public static final int newGoDesc=0x7f090006;
-        public static final int newGoName=0x7f090005;
-        public static final int newGoOkButton=0x7f09000a;
-        public static final int prefs=0x7f09000f;
-        public static final int refreshList=0x7f090004;
+        public static final int checkDone=0x7f09000f;
+        public static final int descText=0x7f09000d;
+        public static final int linearLayout1=0x7f090009;
+        public static final int menu_delete=0x7f090011;
+        public static final int name=0x7f09000c;
+        public static final int newGoButton=0x7f090004;
+        public static final int newGoCancelButton=0x7f09000a;
+        public static final int newGoDesc=0x7f090007;
+        public static final int newGoName=0x7f090006;
+        public static final int newGoOkButton=0x7f09000b;
+        public static final int prefs=0x7f090010;
+        public static final int refreshList=0x7f090005;
         public static final int totalBountyDisplay=0x7f090001;
         public static final int totalBountyLabel=0x7f090000;
     }
@@ -55,6 +56,8 @@ public final class R {
         public static final int go_list_context=0x7f080001;
     }
     public static final class string {
+        public static final int BOUNTY_PREFS=0x7f060009;
+        public static final int TOTAL_BOUNTY_KEY=0x7f06000a;
         public static final int app_name=0x7f060000;
         public static final int cancel=0x7f060007;
         public static final int hello_world=0x7f060001;

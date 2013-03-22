@@ -10,5 +10,7 @@
     <string name="menu_delete">Delete</string>
     <string name="cancel">Cancel</string>
     <string name="ok">OK</string>
+    <string name="BOUNTY_PREFS">BountyPrefs</string>
+    <string name="TOTAL_BOUNTY_KEY">TotalBounty</string>
 
 </resources>

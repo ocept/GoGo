@@ -31,6 +31,14 @@
             android:layout_below="@id/totalBountyLabel"
             android:text="Bounty Target:" />
 
+        <TextView
+            android:id="@+id/bountyGoalTarget"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/totalBountyDisplay"
+            android:layout_toRightOf="@+id/bountyTargetLabel"
+            android:text="Target not found!" />
+
     </RelativeLayout>
     
 	<ListView

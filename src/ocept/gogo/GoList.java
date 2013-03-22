@@ -80,17 +80,24 @@ public class GoList extends ListActivity {
     }
     
     private void updateBounty() {
-        //load and display total bounty
-        SharedPreferences bountyPrefs = getSharedPreferences(BOUNTY_PREFS, MODE_PRIVATE);
-        Integer bounty = bountyPrefs.getInt(TOTAL_BOUNTY_KEY, 0);
+        //load and display total bounty 
+        SharedPreferences bountyPrefs = getSharedPreferences(getString(R.string.BOUNTY_PREFS), MODE_PRIVATE);
         
+        Integer bounty = bountyPrefs.getInt(getString(R.string.TOTAL_BOUNTY_KEY), 0);
         TextView bountyDisplay = (TextView) findViewById(R.id.totalBountyDisplay);
         bountyDisplay.setText(Integer.toString(bounty));
+        
+        String goalName = bountyPrefs.getString("bounty_goal_name", "No goal defined!");
+        TextView goalNameDisplay = (TextView) findViewById(R.id.bountyTargetLabel);
+        goalNameDisplay.setText(goalName+": " );
+        
+        String goalTarget = bountyPrefs.getString("bounty_target", "0");
+        ((TextView) findViewById(R.id.bountyGoalTarget)).setText(goalTarget);
 	}
 
 	private void initCAM()
     {
-    	final ListView listView = getListView();
+    	final ListView listView = getListView(); 
     	
     	listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
     	listView.setMultiChoiceModeListener(new MultiChoiceModeListener() {
@@ -170,6 +177,16 @@ public class GoList extends ListActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.activity_go_list, menu);
         return true;
+    }
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()) {
+        	case R.id.prefs:
+        		Intent i = new Intent(this, prefs.class);
+        		startActivity(i);
+        		return true;
+    		default:
+    			return false;
+        }
     }
     public class goAdapter extends BaseAdapter implements Observer{
     	private LayoutInflater mInflater;
