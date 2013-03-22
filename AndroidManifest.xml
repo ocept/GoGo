@@ -23,6 +23,7 @@
             </intent-filter>
         </activity>
         <activity android:name="NewGo"></activity>
+        <activity android:name="prefs"></activity>
     </application>
 
 </manifest>
